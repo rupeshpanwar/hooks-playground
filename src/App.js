@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-//update state
+//multiple pieces in useState
 
 function App() {
   const [state, setState] = useState({
