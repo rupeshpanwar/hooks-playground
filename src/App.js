@@ -1,49 +1,80 @@
 import React, { useState } from 'react'
 
-//multiple pieces in useState
+//ellegant way to update the state
 
 function App() {
-  const [state, setState] = useState({
-    city: '',
-    country: ''
-  })
 
-  const handleCityChange = (event) => {
-    setState({
-      ...state, city: event.target.value
-    })
-  }
-
-  const handleCountryChange = (event) => {
-    setState({
-      ...state, country: event.target.value
-    })
-  }
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
+  const handleCityChange = (event) => setCity(event.target.value)
+  const handleCountryChange = (event) => setCountry(event.target.value)
 
   return (
     <form>
       <div>
-        <input
-          type="text"
-          placeholder='city'
-          value={state.city}
-          onChange={handleCityChange}
-        />
+        <input type="text"
+          placeholder="city"
+          value={city}
+          onChange={handleCityChange} />
       </div>
       <div>
-        <input
-          type="text"
-          placeholder='country'
-          value={state.country}
-          onChange={handleCountryChange}
-        />
+        <input type="text"
+          placeholder="country"
+          value={country}
+          onChange={handleCountryChange} />
       </div>
+
       <div>
-        <h1>you live in {state.city} , {state.country}</h1>
+        <h1>you liv in {`${city},${country}`}</h1>
       </div>
     </form>
   )
 }
+
+//multiple pieces in useState
+
+// function App() {
+//   const [state, setState] = useState({
+//     city: '',
+//     country: ''
+//   })
+
+//   const handleCityChange = (event) => {
+//     setState({
+//       ...state, city: event.target.value
+//     })
+//   }
+
+//   const handleCountryChange = (event) => {
+//     setState({
+//       ...state, country: event.target.value
+//     })
+//   }
+
+//   return (
+//     <form>
+//       <div>
+//         <input
+//           type="text"
+//           placeholder='city'
+//           value={state.city}
+//           onChange={handleCityChange}
+//         />
+//       </div>
+//       <div>
+//         <input
+//           type="text"
+//           placeholder='country'
+//           value={state.country}
+//           onChange={handleCountryChange}
+//         />
+//       </div>
+//       <div>
+//         <h1>you live in {state.city} , {state.country}</h1>
+//       </div>
+//     </form>
+//   )
+// }
 
 
 //increament test for useState
