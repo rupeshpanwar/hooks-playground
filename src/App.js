@@ -1,26 +1,84 @@
 import React, { useState } from 'react'
 
-//increament test for useState
+//update state
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  // const handleClick = () => setCount(count + 1) //method 1
-
-  //method 2
-  const handleClick = () => setCount((prevCount) => {
-    return prevCount + 1;
+  const [state, setState] = useState({
+    city: '',
+    country: ''
   })
 
+  const handleCityChange = (event) => {
+    setState({
+      ...state, city: event.target.value
+    })
+  }
+
+  const handleCountryChange = (event) => {
+    setState({
+      ...state, country: event.target.value
+    })
+  }
+
   return (
-    <>
-      <button onClick={handleClick}>
-        Increase
-      </button>
-      <h1>{count}</h1>
-    </>
+    <form>
+      <div>
+        <input
+          type="text"
+          placeholder='city'
+          value={state.city}
+          onChange={handleCityChange}
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          placeholder='country'
+          value={state.country}
+          onChange={handleCountryChange}
+        />
+      </div>
+      <div>
+        <h1>you live in {state.city} , {state.country}</h1>
+      </div>
+    </form>
   )
 }
+
+
+//increament test for useState
+
+// function App() {
+//   const [count, setCount] = useState(0)
+
+//   // const handleClick = () => setCount(count + 1) //method 1
+
+//   //method 2
+//   const handleClick = () => setCount((prevCount) => {
+//     return prevCount + 1;
+//   })
+
+//   const handleClickDecrement = () => setCount((prevCount) => {
+//     return prevCount - 1;
+//   })
+
+//   const handleClickReset = () => setCount(0)
+
+//   return (
+//     <>
+//       <button onClick={handleClick}>
+//         Increase
+//       </button>
+//       <button onClick={handleClickDecrement}>
+//         Decrease
+//       </button>
+//       <button onClick={handleClickReset}>
+//         Reset
+//       </button>
+//       <h1>{count}</h1>
+//     </>
+//   )
+// }
 
 //invoke useState
 // function App() {
