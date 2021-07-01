@@ -1,21 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function Box(props){
-  return(
-    <div>
-      <h1>{props.name}</h1>
-      <h2>{props.subtitle}</h2>
-    </div>
-  )
-}
+
 
 function App() {
+
+  const [activated, setActivated] = useState(false)
+
+  const buttonText = activated ? 'activated' : 'deactivated'
+
+  function onClick() {
+    setActivated(!activated)
+  }
+
   return (
-   <Box
-     name="Rupesh"
-     subtitle= "Panwar"
-   />
+    <button onClick={onClick}>
+      {buttonText}
+    </button>
   );
 }
 
