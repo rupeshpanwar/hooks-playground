@@ -1,41 +1,80 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
+//use custom hook - another moduler example
+//create custom hook
+const useCounter = (startingValue) => {
+        const [count,setCount] = useState(startingValue)
 
-//use custom Hooks
-function App() {
-  const userText = useKeyPress('something to initialize')
+        const increament = () => setCount(count + 1)
+        const decreament = () => setCount(count - 1)
 
-  return (
+        return{
+          count,
+          increament,
+          decreament
+        }
+
+}
+
+//takes value from custom hook
+const Display = (props) => {
+  const {count,increament,decreament} = useCounter(props.start)
+
+  return(   
     <div>
-      <h1>Feel free to type, text will show up here</h1>
-      <blockquote>
-        {userText}
-      </blockquote>
+      <button onClick={increament}>Add</button>
+      <button onClick={decreament}>Minus</button>
+      {count}
+    </div>   
+  )
+}
+
+const App = () => {
+  return (
+    //components
+    <div>
+    
+    <Display start={10} />
+    <Display start={20} />
     </div>
   )
 }
 
-function useKeyPress(startingValue) {
-  const [userText,setUserText] = useState(startingValue)
+// //use custom Hooks
+// function App() {
+//   const userText = useKeyPress('something to initialize')
 
-  const handleUserKeyPress = (event) => {
-    const {key,keyCode} = event
+//   return (
+//     <div>
+//       <h1>Feel free to type, text will show up here</h1>
+//       <blockquote>
+//         {userText}
+//       </blockquote>
+//     </div>
+//   )
+// }
 
-    if(keyCode === 32 || (keyCode >= 65 && keyCode <= 90)) {
-      setUserText(`${userText}${key}`)
-    }
-  }
+// function useKeyPress(startingValue) {
+//   const [userText,setUserText] = useState(startingValue)
 
-  useEffect(() => {
-    window.addEventListener('keydown',handleUserKeyPress)
+//   const handleUserKeyPress = (event) => {
+//     const {key,keyCode} = event
 
-    return () => {
-      window.removeEventListener('keydown',handleUserKeyPress)
-    }
-  })
+//     if(keyCode === 32 || (keyCode >= 65 && keyCode <= 90)) {
+//       setUserText(`${userText}${key}`)
+//     }
+//   }
 
-  return userText
-}
+//   useEffect(() => {
+//     window.addEventListener('keydown',handleUserKeyPress)
+
+//     return () => {
+//       window.removeEventListener('keydown',handleUserKeyPress)
+//     }
+//   })
+
+//   return userText
+// }
 
 //another example of component did unmount via useEffect
 // selective state tracking via array [] in useEffect 
