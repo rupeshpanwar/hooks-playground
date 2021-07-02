@@ -1,35 +1,68 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-//ellegant way to update the state
+
+//invoke useEffect
 
 function App() {
 
-  const [city, setCity] = useState('')
-  const [country, setCountry] = useState('')
-  const handleCityChange = (event) => setCity(event.target.value)
-  const handleCountryChange = (event) => setCountry(event.target.value)
+  const [count, setCount] = useState(0)
+
+  const handleCountAdd = () => setCount(count + 1)
+  const handleCountMinus = () => setCount(count - 1)
+
+  useEffect(() => {
+    console.log(`the current value of count is ${count}`)
+  })
 
   return (
-    <form>
+    <div>
       <div>
-        <input type="text"
-          placeholder="city"
-          value={city}
-          onChange={handleCityChange} />
+        <button
+          onClick={handleCountAdd}>Add</button>
       </div>
       <div>
-        <input type="text"
-          placeholder="country"
-          value={country}
-          onChange={handleCountryChange} />
+        <button
+          onClick={handleCountMinus} >Minus</button>
       </div>
 
       <div>
-        <h1>you liv in {`${city},${country}`}</h1>
+        <h1>Current value is {`${count}`}</h1>
       </div>
-    </form>
+    </div>
   )
 }
+
+
+// //ellegant way to update the state
+
+// function App() {
+
+//   const [city, setCity] = useState('')
+//   const [country, setCountry] = useState('')
+//   const handleCityChange = (event) => setCity(event.target.value)
+//   const handleCountryChange = (event) => setCountry(event.target.value)
+
+//   return (
+//     <form>
+//       <div>
+//         <input type="text"
+//           placeholder="city"
+//           value={city}
+//           onChange={handleCityChange} />
+//       </div>
+//       <div>
+//         <input type="text"
+//           placeholder="country"
+//           value={country}
+//           onChange={handleCountryChange} />
+//       </div>
+
+//       <div>
+//         <h1>you live in {`${city},${country}`}</h1>
+//       </div>
+//     </form>
+//   )
+// }
 
 //multiple pieces in useState
 
