@@ -1,44 +1,86 @@
 import React, { useState } from 'react'
 
-//use custom hook - another moduler example
-//create custom hook
-const useCounter = (startingValue) => {
-        const [count,setCount] = useState(startingValue)
+//challenge - custom hook
 
-        const increament = () => setCount(count + 1)
-        const decreament = () => setCount(count - 1)
+const useUserForm = () => {
+  const [value,setValue] = useState('')
 
-        return{
-          count,
-          increament,
-          decreament
-        }
+  const onChange = (event) => {
+    setValue(event.target.value)
+  }
 
+
+  return{
+    value,
+    onChange
+  }
 }
 
-//takes value from custom hook
-const Display = (props) => {
-  const {count,increament,decreament} = useCounter(props.start)
-
-  return(   
-    <div>
-      <button onClick={increament}>Add</button>
-      <button onClick={decreament}>Minus</button>
-      {count}
-    </div>   
-  )
+const FormDisplay = () => {
+    return (
+      <form>
+        <input type="text"
+                placeholder="name"
+                {...useUserForm()}
+                />
+        <input type="text"
+                placeholder="surname"
+               {...useUserForm()}
+                />
+        <input type="text"
+                placeholder="age"
+                {...useUserForm()}
+                />
+      </form>
+    )
 }
 
 const App = () => {
-  return (
-    //components
-    <div>
-    
-    <Display start={10} />
-    <Display start={20} />
-    </div>
+  return(
+    //form display components
+    <FormDisplay />
   )
 }
+
+//use custom hook - another moduler example
+//create custom hook
+// const useCounter = (startingValue) => {
+//         const [count,setCount] = useState(startingValue)
+
+//         const increament = () => setCount(count + 1)
+//         const decreament = () => setCount(count - 1)
+
+//         return{
+//           count,
+//           increament,
+//           decreament
+//         }
+
+// }
+
+// //takes value from custom hook
+// const Display = (props) => {
+//   const {count,increament,decreament} = useCounter(props.start)
+
+//   return(   
+//     <div>
+//       <button onClick={increament}>Add</button>
+//       <button onClick={decreament}>Minus</button>
+//       {count}
+//     </div>   
+//   )
+// }
+
+// const App = () => {
+//   return (
+//     //components
+//     <div>
+    
+//     <Display start={10} />
+//     <Display start={20} />
+//     </div>
+//   )
+// }
 
 // //use custom Hooks
 // function App() {
