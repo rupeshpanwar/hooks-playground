@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 //another example of component did unmount via useEffect
-
+// selective state tracking via array [] in useEffect 
 function Counter() {
   
   const [count, setCount] = useState(0)
+  const [color,setColor] = useState('salmon')
 
   const handleCountAdd = () => setCount(count + 1)
   const handleCountMinus = () => setCount(count - 1)
@@ -15,8 +16,12 @@ function Counter() {
     return () => {
       console.log(`removing anything up n above,last hold value is ${count}`)
     }
-  },[])
+  },[count])
 
+  const handleChangeColor = () => {
+      const nextColor = color === 'salmon' ? 'gold' : 'salmon' 
+      setColor(nextColor)
+  }
   return (
     <div>
       <div>
@@ -27,9 +32,13 @@ function Counter() {
         <button
           onClick={handleCountMinus} >Minus</button>
       </div>
-
       <div>
-        <h1>Current value is {`${count}`}</h1>
+        <button onClick={handleChangeColor}>
+          Change color
+        </button>
+      </div>
+      <div>
+        <h1 style={{color}}>Current value is {`${count}`}</h1>
       </div>
     </div>
   )
