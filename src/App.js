@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
+//another example of component did unmount via useEffect
 
-//invoke useEffect
-
-function App() {
-
+function Counter() {
+  
   const [count, setCount] = useState(0)
 
   const handleCountAdd = () => setCount(count + 1)
@@ -34,7 +33,60 @@ function App() {
       </div>
     </div>
   )
+
 }
+
+function App() {
+  const [visible,setVisible] = useState(false)
+
+  return(
+    <div>
+      <button
+      onClick={() =>setVisible(!visible)}>
+        Show me / Hide me
+      </button>
+
+      {visible && <Counter />}
+    </div>
+  )
+}
+
+
+
+// //invoke useEffect
+
+// function App() {
+
+//   const [count, setCount] = useState(0)
+
+//   const handleCountAdd = () => setCount(count + 1)
+//   const handleCountMinus = () => setCount(count - 1)
+
+//   useEffect(() => {
+//     console.log(`the current value of count is ${count}`)
+
+//     return () => {
+//       console.log(`removing anything up n above,last hold value is ${count}`)
+//     }
+//   })
+
+//   return (
+//     <div>
+//       <div>
+//         <button
+//           onClick={handleCountAdd}>Add</button>
+//       </div>
+//       <div>
+//         <button
+//           onClick={handleCountMinus} >Minus</button>
+//       </div>
+
+//       <div>
+//         <h1>Current value is {`${count}`}</h1>
+//       </div>
+//     </div>
+//   )
+// }
 
 
 // //ellegant way to update the state
