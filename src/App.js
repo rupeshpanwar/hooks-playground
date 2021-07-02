@@ -15,7 +15,7 @@ function Counter() {
     return () => {
       console.log(`removing anything up n above,last hold value is ${count}`)
     }
-  })
+  },[])
 
   return (
     <div>
