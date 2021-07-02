@@ -12,6 +12,10 @@ function App() {
 
   useEffect(() => {
     console.log(`the current value of count is ${count}`)
+
+    return () => {
+      console.log(`removing anything up n above,last hold value is ${count}`)
+    }
   })
 
   return (
