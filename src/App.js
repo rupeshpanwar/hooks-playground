@@ -1,64 +1,101 @@
 import React, { useState, useEffect } from 'react'
 
-//another example of component did unmount via useEffect
-// selective state tracking via array [] in useEffect 
-function Counter() {
-  
-  const [count, setCount] = useState(0)
-  const [color,setColor] = useState('salmon')
 
-  const handleCountAdd = () => setCount(count + 1)
-  const handleCountMinus = () => setCount(count - 1)
+//use custom Hooks
+function App() {
+  const userText = useKeyPress('something to initialize')
 
-  useEffect(() => {
-    console.log(`the current value of count is ${count}`)
-
-    return () => {
-      console.log(`removing anything up n above,last hold value is ${count}`)
-    }
-  },[count])
-
-  const handleChangeColor = () => {
-      const nextColor = color === 'salmon' ? 'gold' : 'salmon' 
-      setColor(nextColor)
-  }
   return (
     <div>
-      <div>
-        <button
-          onClick={handleCountAdd}>Add</button>
-      </div>
-      <div>
-        <button
-          onClick={handleCountMinus} >Minus</button>
-      </div>
-      <div>
-        <button onClick={handleChangeColor}>
-          Change color
-        </button>
-      </div>
-      <div>
-        <h1 style={{color}}>Current value is {`${count}`}</h1>
-      </div>
-    </div>
-  )
-
-}
-
-function App() {
-  const [visible,setVisible] = useState(false)
-
-  return(
-    <div>
-      <button
-      onClick={() =>setVisible(!visible)}>
-        Show me / Hide me
-      </button>
-
-      {visible && <Counter />}
+      <h1>Feel free to type, text will show up here</h1>
+      <blockquote>
+        {userText}
+      </blockquote>
     </div>
   )
 }
+
+function useKeyPress(startingValue) {
+  const [userText,setUserText] = useState(startingValue)
+
+  const handleUserKeyPress = (event) => {
+    const {key,keyCode} = event
+
+    if(keyCode === 32 || (keyCode >= 65 && keyCode <= 90)) {
+      setUserText(`${userText}${key}`)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown',handleUserKeyPress)
+
+    return () => {
+      window.removeEventListener('keydown',handleUserKeyPress)
+    }
+  })
+
+  return userText
+}
+
+//another example of component did unmount via useEffect
+// selective state tracking via array [] in useEffect 
+// function Counter() {
+  
+//   const [count, setCount] = useState(0)
+//   const [color,setColor] = useState('salmon')
+
+//   const handleCountAdd = () => setCount(count + 1)
+//   const handleCountMinus = () => setCount(count - 1)
+
+//   useEffect(() => {
+//     console.log(`the current value of count is ${count}`)
+
+//     return () => {
+//       console.log(`removing anything up n above,last hold value is ${count}`)
+//     }
+//   },[count])
+
+//   const handleChangeColor = () => {
+//       const nextColor = color === 'salmon' ? 'gold' : 'salmon' 
+//       setColor(nextColor)
+//   }
+//   return (
+//     <div>
+//       <div>
+//         <button
+//           onClick={handleCountAdd}>Add</button>
+//       </div>
+//       <div>
+//         <button
+//           onClick={handleCountMinus} >Minus</button>
+//       </div>
+//       <div>
+//         <button onClick={handleChangeColor}>
+//           Change color
+//         </button>
+//       </div>
+//       <div>
+//         <h1 style={{color}}>Current value is {`${count}`}</h1>
+//       </div>
+//     </div>
+//   )
+
+// }
+
+// function App() {
+//   const [visible,setVisible] = useState(false)
+
+//   return(
+//     <div>
+//       <button
+//       onClick={() =>setVisible(!visible)}>
+//         Show me / Hide me
+//       </button>
+
+//       {visible && <Counter />}
+//     </div>
+//   )
+// }
 
 
 
